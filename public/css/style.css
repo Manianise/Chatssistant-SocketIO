@@ -116,7 +116,6 @@ Messages
   content: '';
   position: absolute;
   bottom: -6px;
-  border-top: 6px solid #000;
   left: 0;
   border-right: 7px solid transparent;
 }
@@ -141,7 +140,7 @@ Messages
   float: right;
   color: #fff;
   text-align: right;
-  background: #000 !important;
+  background: #55513e !important;
   border-radius: 10px 10px 0 10px;
 }
 .messages .message.message-personal::before {
@@ -149,7 +148,6 @@ Messages
   right: 0;
   border-right: none;
   border-left: 5px solid transparent;
-  border-top: 4px solid #257287;
   bottom: -4px;
 }
 .messages .message:last-child {
@@ -157,8 +155,8 @@ Messages
 }
 .messages .message.new {
   color: #fff;
-  background: -webkit-linear-gradient(330deg, #a28144, #55513e);
-  background: linear-gradient(120deg, #a28144, #55513e);
+  background: -webkit-linear-gradient(330deg, #55513e, #a28144);
+  background: linear-gradient(120deg, #55513e, #a28144);
   -webkit-transform: scale(0);
           transform: scale(0);
   -webkit-transform-origin: 0 0;
@@ -167,6 +165,7 @@ Messages
           animation: bounce 500ms linear both;
 
 }
+
 .messages .message.loading::before {
   position: absolute;
   top: 50%;
@@ -269,7 +268,6 @@ Message Box
   height:20px;
   position: absolute;
   z-index: 1;
-  top: 9px;
   right: 10px;
   color: #fff;
   border: none;
@@ -326,7 +324,6 @@ Custom Srollbar
 
   #chatssistant {
     right:1vw;
-    bottom: -5vw;
     box-shadow:0px 5px 10px 0px #927642 !important;
     grid-column: 4 / 4;
     grid-row: 2;
@@ -414,7 +411,6 @@ Custom Srollbar
     transition: transform 0.7s ease-in-out;
     max-width: inherit;
     max-height: inherit;
-    padding:10px;
   }
 
   .slider-img {

@@ -1,7 +1,7 @@
 /**
-* Author: Wilbert Muza
+* Author: Pierre-Alexandre STERBIK
 * Version: 1.0.0
-* Signature: wmuza
+* Signature: Manianise
 */
 
 'use strict';
@@ -28,9 +28,26 @@ class MainChat  {
 	  let m = d.getMinutes();
 	  $('<div class="timestamp">' + d.getHours() + ':' + m + '</div>').appendTo($('.message:last'));
 	}
+
+	static splitLongWords(value) {
+
+		const maxWordLength = 30;
+		const words = value.split(' ');
+		const result = [];
+	
+		words.forEach(word => {
+			while (word.length > maxWordLength) {
+				result.push(word.slice(0, maxWordLength));
+				word = word.slice(maxWordLength);
+			}
+			result.push(word);
+		});
+	
+		return result.join(' ');
+	}
 	
 	static insertMessage() {
-	  const msg = $('.message-input').val();
+	  const msg = this.splitLongWords($('.message-input').val());
 	  if ($.trim(msg) == '') return false;
 	  $('.message-input').val(null);
 	  MainChat.updateScrollbar();
@@ -39,7 +56,7 @@ class MainChat  {
 	}
 		
 	static LoadEventHandlers() {
-			Fake = [ 'Bonjour, je suis Mojo, votre chatssistant ! Dites moi ce que je peux faire pour vous ?', 'Nice to meet you', 'How are you?', 'Not too bad, thanks', 'What do you do?', 'That\'s awesome', 'Codepen is a nice place to stay', 'I think you\'re a nice person', 'Why do you think that?', 'Can you explain?', 'Anyway I\'ve gotta go now', 'It was a pleasure chat with you', 'Time to make a new codepen', 'Bye', ':)' ]
+			Fake = [ 'Bonjour, je suis Mojo, votre chatssistant ! Dites moi ce que je peux faire pour vous ?', 'Je suis désolé, pour le moment mes phrases sont pré-enregistrées, mais je vais aller mieux bientôt rassurez-vous !', 'How are you?', 'Not too bad, thanks', 'What do you do?', 'That\'s awesome', 'Codepen is a nice place to stay', 'I think you\'re a nice person', 'Why do you think that?', 'Can you explain?', 'Anyway I\'ve gotta go now', 'It was a pleasure chat with you', 'Time to make a new codepen', 'Bye', ':)' ]
 
 			
 			$('.message-submit').click( () => {
@@ -119,8 +136,101 @@ class MainChat  {
 						i++;
 			}, 1000 + (Math.random() * 20) * 100);
 	}
+
+	static aiAnswer() {
+
+	}
 	
 }
+
+
+function handleToggle(arr) {
+	arr.forEach(e => document.querySelector(e).classList.toggle('active'))
+	}
+	
+function bubbleCheck(selector) {
+
+		let check = false;
+
+		document.querySelectorAll(selector).forEach(e => {
+			if (e.classList.contains('active')) {
+				check = true;
+			}
+		})
+		return check;
+	}
+
+function formReset() {
+
+	document.querySelectorAll('.slider-img').forEach((e, index) => index !== 0 ? e.classList.remove('active') : 			e.classList.add('active'))
+
+	bubbleCheck('#call') && handleToggle(['#call'])
+
+	if(!bubbleCheck('#form-chatssistant') ) {
+		handleToggle(['#form-chatssistant'])
+	} else {
+		handleToggle(['#form-chatssistant', '#wait'])
+		setTimeout(() => {handleToggle(['#wait'])}, 3000)
+	}
+
+}
+
+function checkCheckBoxes(selector) {
+	
+	let checked = false;
+	let elt = document.querySelectorAll(selector);
+	
+	elt.forEach(e => {
+		if(e.checked) {
+			checked = true
+		}
+	})
+	return checked;
+}
+
+function promiseCheckBoxes(selector) {
+	return new Promise ((res, rej) => {
+		!checkCheckBoxes(selector) ? res(true) : rej(false)
+	})
+}
+	
+function promiseSelect(selector) {
+	
+	let elt = document.querySelector(selector)
+	return new Promise ((resolve, reject) => {
+	elt.value === '' ? resolve(true) : reject(false)
+		
+	})
+	
+}
+
+function resolvePromise({
+	call : call,
+	promiseSelector : promiseSelector,
+	feedBackSelector : feedBackSelector = promiseSelector,
+	handleToggle : array
+}) {
+	call(promiseSelector)
+		.then((result) => {
+			document.querySelector(feedBackSelector).classList.add('is-invalid')
+		})
+		.catch((error) => {
+			handleToggle(array)
+		})
+}
+
+window.addEventListener('load', () => {
+
+	setInterval(() => {
+		if(!bubbleCheck('.bubbles')) {
+			$('#call').toggleClass('active');
+			setTimeout(() => {
+					$('#call').toggleClass('active'); 
+			}, 3000)	
+		}
+	}, 10000);
+
+})
 
 
 

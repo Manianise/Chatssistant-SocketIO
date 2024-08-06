@@ -1,5 +1,6 @@
 ## Welcome to Private and Public Chat Socket.IO App using an AI as responder ##
-> ### Original code for socket is sompliments of [Wilbert Muza](https://github.com/wmuza) ###
+
+> ### Original code for socket is compliments of [Wilbert Muza](https://github.com/wmuza) ###
 
 ### Socket.IO Real-Time Chat with Auto Reply ### 
    July, 2018 

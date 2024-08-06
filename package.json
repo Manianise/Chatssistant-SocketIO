@@ -1,12 +1,12 @@
 {
   "name": "chat",
   "version": "1.0.0",
-  "description": "Wilbertz first Socket IO app",
+  "description": "Chatssistan",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Wilbert Muza",
+  "author": "Pierre-Alexandre STERBIK with original code from Wilbert Muza",
   "dependencies": {
     "express": "^4.16.3",
     "socket.io": "^2.5.0"
